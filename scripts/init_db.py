@@ -79,7 +79,7 @@ def main():
 
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
-    print(f"\nShopFlow DB initializer")
+    print(f"\nSwiftCart DB initializer")
     print(f"  Target: {os.path.abspath(DB_PATH)}\n")
 
     conn = get_connection(DB_PATH)

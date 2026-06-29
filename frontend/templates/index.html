@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwiftCart — Shop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+ 
+  <nav>
+    <span class="logo">⚡ SwiftCart</span>
+    <a href="/" class="nav-link">Shop</a>
+    <a href="/admin" class="nav-link">Admin</a>
+  </nav>
+ 
+  <main class="page">
+ 
+    <!-- Low-stock alert (shown when items need restocking) -->
+    <div id="low-stock-banner" class="alert-banner hidden">
+      ⚠️ <strong>Stock alert:</strong>
+      <span id="low-stock-text"></span>
+    </div>
+ 
+    <!-- Toolbar: search + filters -->
+    <div class="toolbar">
+      <input
+        id="search"
+        type="search"
+        class="search-box"
+        placeholder="Search products or SKU…"
+        autocomplete="off"
+      >
+ 
+      <select id="category-filter" class="filter-select">
+        <option value="">All categories</option>
+      </select>
+ 
+      <select id="sort" class="filter-select">
+        <option value="name">Name A–Z</option>
+        <option value="price_asc">Price: low to high</option>
+        <option value="price_desc">Price: high to low</option>
+        <option value="stock">Most in stock</option>
+      </select>
+ 
+      <span id="count-label" class="count-label"></span>
+    </div>
+ 
+    <!-- Product grid -->
+    <div id="product-grid" class="product-grid"></div>
+ 
+  </main>
+ 
+  <script src="{{ url_for('static', filename='js/catalog.js') }}"></script>
+</body>
+</html>
+

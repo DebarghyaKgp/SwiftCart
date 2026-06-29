@@ -25,16 +25,19 @@ def create_app() -> Flask:
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-secret-change-me")
     app.config["DATABASE_PATH"] = os.environ.get("DATABASE_PATH", "database/shopflow.db")
+    app.url_map.strict_slashes = False
+
 
     # ── Register DB teardown ──────────────────────────────────────────
     init_db(app)
 
+    
     # ── Register blueprints (uncomment as you build each phase) ──────
-    # from backend.routes.products  import bp as products_bp
+    from backend.routes.products  import bp as products_bp
     # from backend.routes.orders    import bp as orders_bp
     # from backend.routes.admin     import bp as admin_bp
     # from backend.routes.suppliers import bp as suppliers_bp
-    # app.register_blueprint(products_bp,  url_prefix="/api/products")
+    app.register_blueprint(products_bp,  url_prefix="/api/products")
     # app.register_blueprint(orders_bp,    url_prefix="/api/orders")
     # app.register_blueprint(admin_bp,     url_prefix="/api/admin")
     # app.register_blueprint(suppliers_bp, url_prefix="/api/suppliers")
@@ -42,12 +45,13 @@ def create_app() -> Flask:
     # ── Health check ─────────────────────────────────────────────────
     @app.get("/api/health")
     def health():
-        return jsonify({"status": "ok", "version": "1.0.0"})
+        return jsonify({'app': 'SwiftCart', "status": "ok", "version": "2.0.0"})
 
-    # ── Root → serve storefront (Phase 2+) ───────────────────────────
+    # ── Storefront (serves the HTML frontend) ─────────────────
     @app.get("/")
     def index():
-        return jsonify({"message": "ShopFlow API running. Frontend coming in Phase 2."})
+        from flask import render_template
+        return render_template('index.html')
 
     return app
 

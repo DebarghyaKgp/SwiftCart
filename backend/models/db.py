@@ -1,5 +1,5 @@
 """
-backend/models/db.py — SQLite connection helper for ShopFlow.
+backend/models/db.py — SQLite connection helper for SwiftCart.
 
 Every route module imports `get_db` and `query` from here.
 Flask's `g` object ensures one connection per request.
@@ -12,7 +12,7 @@ from flask import g
 
 DB_PATH = os.environ.get(
     "DATABASE_PATH",
-    os.path.join(os.path.dirname(__file__), "..", "..", "database", "shopflow.db")
+    os.path.join(os.path.dirname(__file__), "..", "..", "database", "swiftcart.db")
 )
 
 
